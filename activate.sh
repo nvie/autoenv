@@ -131,7 +131,7 @@ use_env() {
     else
       echo -n "Create virtualenv \"$venv\" now? (Yn) "
       read answer
-      if [[ "$answer" != "n" ]]; then
+      if [[ "$answer" == "y" ]]; then
         mkvirtualenv "$venv"
       fi
     fi
