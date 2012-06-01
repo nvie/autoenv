@@ -51,9 +51,9 @@ autoenv_hashline()
   typeset envfile hash
   typeset hasher
   envfile=$1
-  if which -s shasum >/dev/null; then
+  if command -v shasum >/dev/null; then
     hasher="shasum"
-  elif which -s sha1sum >/dev/null; then
+  elif command -v sha1sum >/dev/null; then
     hasher="sha1sum"
   else
     echo "Could not find a suitable hasher. Tried 'sha1sum' and 'shasum'." >&2
