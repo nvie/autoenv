@@ -49,8 +49,17 @@ autoenv_indent() {
 autoenv_hashline()
 {
   typeset envfile hash
+  typeset hasher
   envfile=$1
-  hash=$(shasum "$envfile" | cut -d' ' -f 1)
+  if which -s shasum >/dev/null; then
+    hasher="shasum"
+  elif which -s sha1sum >/dev/null; then
+    hasher="sha1sum"
+  else
+    echo "Could not find a suitable hasher. Tried 'sha1sum' and 'shasum'." >&2
+    exit 2
+  fi
+  hash=$($hasher "$envfile" | cut -d' ' -f 1)
   echo "$envfile:$hash"
 }
 
