@@ -133,6 +133,12 @@ cd() {
 # It only performs an action if the requested virtualenv is not the current one.
 use_env() {
   typeset venv
+
+  if [[ "$#" -ne 1 ]]; then
+      echo "error: Please provide an argument to use_env." >&2
+      return 2
+  fi
+
   venv="$1"
   if [[ "${VIRTUAL_ENV:t}" != "$venv" ]]; then
     if workon | grep -q "$venv"; then
